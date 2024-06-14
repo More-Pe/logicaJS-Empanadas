@@ -29,13 +29,24 @@ grupo, o sea la que esté más a la izquierda ya que están ordenadas de mayor a
 de haber dos o 3 empanadas de mayor valor, se incluyan en el mismo grupo para evitar pagar dos o tres veces ese valor al
 combinarlas en otros grupos.
 
+Mensajes de error: "Throw error on negative input value"
+"Throws error when the total sum of inputs (2+2+1) is not a multiple of 3"
+"Throws error when the total sum of inputs (15+15+20) is not less than 40"
+
+Casos de combinación.
+Si hay un valor de empanadas:
+if ((a!==0 && b===0 && c===0) || (a===0 && b!==0 && c===0) || (a===0 && b===0 && c!==0))
+Si hay dos valores de empanadas:
+if ((a===0 && b!==0 && c!==0) || (a!==0 && b===0 && c!==0) || (a!==0 && b!==0 && c===0))
+Si hay tres valores de empanadas:
+if (a!==0 && b!==0 && c!==0)
+
+
 
 */
 
 
 
-
-
-export const fn = (/* argumentos de la función */) => {
+export const fn = (a, b, c) => {
    // Cuerpo de la función: Completa la lógica de la función aquí.
 };
