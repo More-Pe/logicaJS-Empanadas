@@ -35,18 +35,29 @@ Mensajes de error: "Throw error on negative input value"
 
 Casos de combinación.
 Si hay un valor de empanadas:
-if ((a!==0 && b===0 && c===0) || (a===0 && b!==0 && c===0) || (a===0 && b===0 && c!==0))
+switch
+case a!==0 && b===0 && c===0
+ (totalEmpanadas/3)*12;
+ break;
+(a===0 && b!==0 && c===0) || (a===0 && b===0 && c!==0)){
+totalEmpanadas/3}
 Si hay dos valores de empanadas:
 if ((a===0 && b!==0 && c!==0) || (a!==0 && b===0 && c!==0) || (a!==0 && b!==0 && c===0))
 Si hay tres valores de empanadas:
-if (a!==0 && b!==0 && c!==0)
-
-
-
-*/
-
-
+if (a!==0 && b!==0 && c!==0)*/
 
 export const fn = (a, b, c) => {
-   // Cuerpo de la función: Completa la lógica de la función aquí.
-};
+   if (a < 0 || b < 0 || c < 0) {
+      console.log("The quantities cannot be less than zero.");
+   };
+  
+   if ((a + b + c) % 3!== 0 && a + b + c < 40) {
+      console.log("The total sum of the empanadas must be a multiple of three and less than 40.");
+   };
+
+   if (isNaN(a) || isNaN(b) || isNaN(c)) {
+      console.log("Enter a numerical value.")
+   }
+
+}
+
