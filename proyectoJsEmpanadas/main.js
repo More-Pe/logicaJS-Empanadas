@@ -1,46 +1,3 @@
-/*
-
-Datos:
-a= cantidad de empanadas de 12 euros
-b= cantidad de empanadas de 14 euros
-c= cantidad de empanadas empanadas de 16 euros
-
-ab= mixtas de 13 euros
-ac= mixtas de 14 euros
-bc= mixtas de 15 euros
-
-x= cantidad total de empanadas (a+b+c)
-
-y= cantidad total de empanadas a pagar (x/3)
-
-Van a existir tres casos fuertemente diferenciados:
-
-Caso 1: que todas las empanadas sean del mismo valor, en ese caso simplemente se deberá calcular las empanadas a pagar y
-multiplicarlas por el precio correspondiente.
-
-Caso 2: que haya empanadas de dos precios diferentes; en principio pensé que serviría hacer el promedio, pero no sirve
-para todos los casos, por lo cual se resolverá igual que el caso 3:
-
-Caso 3: que haya empanadas de tres precios diferentes:
-
-Pienso que la forma de resolver el problema sería combinar la máxima cantidad de empanadas posibles para
-minimizar el costo y luego ordenar todas de mayor a menor, luego combinarlas de a tres y cobrar la más cara de cada
-grupo, o sea la que esté más a la izquierda ya que están ordenadas de mayor a menor. Esto nos aseguraría que en caso
-de haber dos o 3 empanadas de mayor valor, se incluyan en el mismo grupo para evitar pagar dos o tres veces ese valor al
-combinarlas en otros grupos.
-
-He pensado lo siguiente: para poder optimizar la combinación de empanadas sin que me importe la comparación entre
-a, b y c (es decir, lo que hice arriba); se puede hacer un array con los precios repetidos tantas veces como la cantidad sea ingresada y luego ordenarlo
-de mayor a menor (o al revés, da igual). Al estar ordenado, si comienzo a combinar de a dos desde los extremos hacia el
-centro, por ejemplo las posiciones 0 y length del array -1, siempre me aseguraré de coger la más cara con la más barata.
-Para combinarlas lo que se hace es sacar el promedio entre ambas y luego poner ese valor en un nuevo array por duplicado,
-porque claro, hemos sacado el promedio pero las empanadas con ese precio serán dos. Bien,  en caso de que el lenght de mi array original sea impar, se hará lo mencionado anteriormente y luego se añadirá el valor de la posición central del array
-en el array original, sin modificar su precio.
-El nuevo array deberá estar ordenado también de mayor a menor para asegurarnos de que al agrupar empanadas cada 3, sí o sí
-los valores más caros irán juntos, evitando pagar más innecesariamente. De esta manera, lo que quedaría por hacer finalmente es sumar las posiciones múltiplos de 3 del nuevo array (más la posición 0), para obtener el costo a pagar por todas las empanadas.
-
-
-*/
 
 //a, b and c are the number of empanadas of 12, 14 and 16 euros respectively
 export const fn = (a, b, c) => {
@@ -60,6 +17,7 @@ export const fn = (a, b, c) => {
     //A new array is started which will contain the prices of the pies repeated as many times as indicated by the quantity.
 
     const empanadas = [];
+
     for (let i = 0; i < a; i++){
         empanadas.push(prices[0]);
     }
@@ -72,23 +30,27 @@ export const fn = (a, b, c) => {
         empanadas.push(prices[2]);
     }
 
-    //hasta acá funciona bien
+    //A new array is generated containing the new prices obtained from the empanadas combinations.
     
     const combinations = [];
 
-    while (empanadas.length > 0) {
+    while (empanadas.length > 0){
         if (empanadas.length === 1) {
-          combinations.push(empanadas[0]);
-          empanadas.shift();
+            combinations.push(empanadas[0]);
+            empanadas.shift();
         } else {
-          const firstEmpanada = empanadas.shift();
-          const lastEmpanada = empanadas.pop();
-          const newPrice = (firstEmpanada + lastEmpanada) / 2;
-          combinations.push(newPrice, newPrice);
+            const firstEmpanada = empanadas.shift();
+            const lastEmpanada = empanadas.pop();
+            const newPrice = (firstEmpanada + lastEmpanada) / 2;
+            combinations.push(newPrice, newPrice);
         }
-      }
+    }
     
+    //The new array is sorted so that the desired positions can be accessed later.
+
     combinations.sort((a, b) => b - a);
+
+    //A variable is generated that will store the total price, obtained by adding the elements of the array with index zero and index multiples of 3.
 
     let totalPrice = 0;
     
