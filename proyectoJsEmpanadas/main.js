@@ -29,23 +29,6 @@ grupo, o sea la que esté más a la izquierda ya que están ordenadas de mayor a
 de haber dos o 3 empanadas de mayor valor, se incluyan en el mismo grupo para evitar pagar dos o tres veces ese valor al
 combinarlas en otros grupos.
 
-Mensajes de error: "Throw error on negative input value"
-"Throws error when the total sum of inputs (2+2+1) is not a multiple of 3"
-"Throws error when the total sum of inputs (15+15+20) is not less than 40"
-
-Casos de combinación.
-Si hay un valor de empanadas:
-switch
-case a!==0 && b===0 && c===0
- (totalEmpanadas/3)*12;
- break;
-(a===0 && b!==0 && c===0) || (a===0 && b===0 && c!==0)){
-totalEmpanadas/3}
-Si hay dos valores de empanadas:
-if ((a===0 && b!==0 && c!==0) || (a!==0 && b===0 && c!==0) || (a!==0 && b!==0 && c===0))
-Si hay tres valores de empanadas:
-if (a!==0 && b!==0 && c!==0)
-
 He pensado lo siguiente: para poder optimizar la combinación de empanadas sin que me importe la comparación entre
 a, b y c (es decir, lo que hice arriba); se puede hacer un array con los precios repetidos tantas veces como la cantidad sea ingresada y luego ordenarlo
 de mayor a menor (o al revés, da igual). Al estar ordenado, si comienzo a combinar de a dos desde los extremos hacia el
@@ -59,7 +42,64 @@ los valores más caros irán juntos, evitando pagar más innecesariamente. De es
 
 */
 
-/*
+//a, b and c are the number of empanadas of 12, 14 and 16 euros respectively
+export const fn = (a, b, c) => {
+    
+    if (a < 0 || b < 0 || c < 0) {
+        throw new Error("The quantities cannot be less than zero.");
+    }
+      
+    if ((a + b + c) % 3 !== 0 || a + b + c > 40) {
+        throw new Error("The total number of empanadas must be a multiple of 3 and less than 40.");
+    }
+
+    //This array contains the prices initially established
+
+    const prices = [12, 14, 16];
+
+    //A new array is started which will contain the prices of the pies repeated as many times as indicated by the quantity.
+
+    const empanadas = [];
+    for (let i = 0; i < a; i++){
+        empanadas.push(prices[0]);
+    }
+
+    for (let i = 0; i < b; i++){
+        empanadas.push(prices[1]);
+    }
+
+    for (let i = 0; i < c; i++){
+        empanadas.push(prices[2]);
+    }
+
+    //hasta acá funciona bien
+    
+    const combinations = [];
+
+    while (empanadas.length > 0) {
+        if (empanadas.length === 1) {
+          combinations.push(empanadas[0]);
+          empanadas.shift();
+        } else {
+          const firstEmpanada = empanadas.shift();
+          const lastEmpanada = empanadas.pop();
+          const newPrice = (firstEmpanada + lastEmpanada) / 2;
+          combinations.push(newPrice, newPrice);
+        }
+      }
+    
+    combinations.sort((a, b) => b - a);
+
+    let totalPrice = 0;
+    
+    for (let i = 0; i < combinations.length; i += 3){
+        totalPrice += combinations[i];
+    }
+
+    return totalPrice;
+};
+
+
 console.log(fn(1,1,1));
 console.log(fn(3,3,0));
 console.log(fn(2,0,1));
@@ -69,4 +109,4 @@ console.log(fn(3,0,0));
 console.log(fn(1,2,3));
 console.log(fn(3,2,1));
 console.log(fn(1,0,2));
-console.log(fn(3,0,3));*/
+console.log(fn(3,0,3));

@@ -18,6 +18,6 @@
   "author": "Fidel Gilart",
   "license": "ISC",
   "devDependencies": {
-    "vitest": "^1.6.0"
+    "vitest": "^1.0.4"
   }
 }
