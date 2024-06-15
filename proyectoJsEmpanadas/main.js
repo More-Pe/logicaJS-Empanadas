@@ -44,20 +44,29 @@ totalEmpanadas/3}
 Si hay dos valores de empanadas:
 if ((a===0 && b!==0 && c!==0) || (a!==0 && b===0 && c!==0) || (a!==0 && b!==0 && c===0))
 Si hay tres valores de empanadas:
-if (a!==0 && b!==0 && c!==0)*/
+if (a!==0 && b!==0 && c!==0)
 
-export const fn = (a, b, c) => {
-   if (a < 0 || b < 0 || c < 0) {
-      console.log("The quantities cannot be less than zero.");
-   };
-  
-   if ((a + b + c) % 3!== 0 && a + b + c < 40) {
-      console.log("The total sum of the empanadas must be a multiple of three and less than 40.");
-   };
+He pensado lo siguiente: para poder optimizar la combinación de empanadas sin que me importe la comparación entre
+a, b y c (es decir, lo que hice arriba); se puede hacer un array con los precios repetidos tantas veces como la cantidad sea ingresada y luego ordenarlo
+de mayor a menor (o al revés, da igual). Al estar ordenado, si comienzo a combinar de a dos desde los extremos hacia el
+centro, por ejemplo las posiciones 0 y length del array -1, siempre me aseguraré de coger la más cara con la más barata.
+Para combinarlas lo que se hace es sacar el promedio entre ambas y luego poner ese valor en un nuevo array por duplicado,
+porque claro, hemos sacado el promedio pero las empanadas con ese precio serán dos. Bien,  en caso de que el lenght de mi array original sea impar, se hará lo mencionado anteriormente y luego se añadirá el valor de la posición central del array
+en el array original, sin modificar su precio.
+El nuevo array deberá estar ordenado también de mayor a menor para asegurarnos de que al agrupar empanadas cada 3, sí o sí
+los valores más caros irán juntos, evitando pagar más innecesariamente. De esta manera, lo que quedaría por hacer finalmente es sumar las posiciones múltiplos de 3 del nuevo array (más la posición 0), para obtener el costo a pagar por todas las empanadas.
 
-   if (isNaN(a) || isNaN(b) || isNaN(c)) {
-      console.log("Enter a numerical value.")
-   }
 
-}
+*/
 
+/*
+console.log(fn(1,1,1));
+console.log(fn(3,3,0));
+console.log(fn(2,0,1));
+console.log(fn(9,10,11));
+console.log(fn(11,10,9));
+console.log(fn(3,0,0));
+console.log(fn(1,2,3));
+console.log(fn(3,2,1));
+console.log(fn(1,0,2));
+console.log(fn(3,0,3));*/
