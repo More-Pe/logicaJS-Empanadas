@@ -47,39 +47,42 @@ En la resolución de problemas, es imprescindible enfocarse en dos cosas:
 
 Por esto el primer paso fue leer detenidamente el problema y extraer lo que realmente es relevante:
 
-#### Precios y Cantidades:
+#### 💲 Precios y Cantidades:
 Hay empanadas de 12, 14 y 16 euros.
 Las cantidades de cada tipo de empanada se denotan como a, b y c respectivamente.
 
-#### Oferta Especial:
+#### 💥 Oferta Especial:
 Hay una oferta 3x1, donde se paga solo la empanada más cara de cada grupo de 3.
 
-#### Condiciones:
+#### 📋 Condiciones:
 La cantidad total de empanadas (a + b + c) debe ser múltiplo de 3.
 La cantidad total de empanadas no debe exceder 40.
 Las cantidades de empanadas no pueden ser negativas.
 
-#### Combinaciones:
+#### 🔀 Combinaciones:
 Las empanadas pueden combinarse en grupos de dos para crear empanadas con precios promedio. Por ejemplo, una empanada de 12 euros y una de 16 euros pueden combinarse para formar dos empanadas de 14 euros.
 
-#### Objetivo:
+#### 🎯 Objetivo:
 Pagar el precio **mínimo** al comprar todas las empanadas.
 
-### :pencil2: Análisis de los posibles casos.
+### :female_detective: Análisis de los posibles casos.
 
 En papel, comencé a analizar los casos y combinaciones posibles para intentar encontrar patrones que me ayuden a resolver el problema: sabía cómo era la forma de combinar para los casos particulares pero no lograba poder llegar a una generalización, es decir, una solución que me valga para todos los casos.
 
-Llegué a las siguientes conclusiones:
+#### :bulb: Llegué a las siguientes conclusiones:
 
-* Separarlo por casos, como hice al principio (que todas las empanadas sean de un solo precio, que sean de dos precios o que sean de tres precios diferentes), no era el camino.
+* Separarlo por casos, como hice al principio (que todas las empanadas sean de un solo precio, que sean de dos precios o que sean de tres precios diferentes), es un camino complicado.
 * Siempre debía combinar todas las empanadas posibles, siendo la mejor combinación las de mayor precio con las de menor precio.
 * Debía agrupar las empanadas de a 3 y descubrir cuál era la de mayor precio (para pagar esa) y si existían otras de ese valor, incluirlas en el mismo grupo para evitar pagarlas.
 
+De forma gráfica:
 
+<img src="./img/esquema-empanadas.png">
 
+## ⚙️ Funcionalidad
 
-
-
-
-
-
+1. La función primero verifica si las cantidades de entrada son válidas (no negativas y la suma total es un múltiplo de 3 y menor que 40).
+2. Luego, genera un array de precios de empanadas basado en las cantidades de entrada.
+3. La función combina los precios de las empanadas para generar un nuevo array de precios, promediando los precios de las empanadas en cada combinación.
+4. El nuevo array se ordena en orden descendente.
+5. La función calcula el precio total sumando los precios en índices 0 y múltiplos de 3 del array ordenado.
