@@ -1,6 +1,6 @@
-# Compra de empanadas
+# 🥟 Reto de Lógica: compra de empanadas 🥟
 
-## Enunciado del problema
+## 📜 Enunciado del problema
 
 El profesor Maple se embarca en la tarea de adquirir empanadas para todos los participantes del bootcamp de programación. Dado que hoy es el Día de las Empanadas,  hay una oferta especial en la que te llevas hasta tres empanadas y solo pagas la más cara. Con un presupuesto ajustado para el curso, los profesores debaten para intentar minimizar el gasto total por todas las empanadas.
 
@@ -20,15 +20,15 @@ Ayúdales haciendo una función que lo calcule lo más rápido posible: hay dece
 
 Las empanadas que han elegido los profesores tienen 3, 4 o 5 ingredientes. La masa de una empanada vale 6 euros, y cada ingrediente adicional vale 2 euros. Así, las empanadas pueden valer 12, 14 o 16 euros. Se garantiza que el número total de empanadas será múltiplo de 3.
 
-## Entrada
+### 📥 Entrada
 
 La función debe tener tres parámetros de entrada. Cada conjunto de entrada consta de tres enteros, a b c, que son el número de empanadas de 3, 4 y 5 ingredientes, respectivamente. Se garantiza que el número de empanadas, a + b + c, cumple que a + b + c < 40. Además, el número de empanadas es divisible entre 3.
 
-## Salida
+### 📤 Salida
 
 Por cada conjunto de entrada, retornar un único entero: la mínima cantidad de euros que se puede pagar para llevarse todas las empanadas.
 
-## Ejemplos de casos de uso
+### Ejemplos de casos de uso
 
 | Entrada     | Salida      |
 | ----------- | ----------- |
@@ -37,50 +37,49 @@ Por cada conjunto de entrada, retornar un único entero: la mínima cantidad de 
 | 2, 0, 1     | 14          |
 | 9, 10, 11   | 142         |
 
+## :question: Proceso de resolución del problema
 
-## Instrucciones de uso
+### :mag_right: Búsqueda de los datos principales.
 
-1. Clonar el repositorio
-3. Instalar las dependencias:
+En la resolución de problemas, es imprescindible enfocarse en dos cosas: 
+1. Los datos que tenemos y nos ayudarán a resolver el problema (hay varios datos innecesarios).
+2. El objetivo al cuál se quiere llegar.
 
-    ```bash
-    npm install
-    ```
+Por esto el primer paso fue leer detenidamente el problema y extraer lo que realmente es relevante:
 
-4. Completar los argumentos y el cuerpo de la función `fn` en el archivo (`main.js`). No se debe renombrar la función `fn`.
+#### Precios y Cantidades:
+Hay empanadas de 12, 14 y 16 euros.
+Las cantidades de cada tipo de empanada se denotan como a, b y c respectivamente.
 
-    ```javascript
-    // main.js
-    export const fn = (/* argumentos de la función */) => {
-    // Cuerpo de la función: Completa la lógica de la función aquí.
-    };
-    ```
+#### Oferta Especial:
+Hay una oferta 3x1, donde se paga solo la empanada más cara de cada grupo de 3.
 
-4. Ejecutar los test:
-    ```bash
-    npm run test
-    ```
+#### Condiciones:
+La cantidad total de empanadas (a + b + c) debe ser múltiplo de 3.
+La cantidad total de empanadas no debe exceder 40.
+Las cantidades de empanadas no pueden ser negativas.
 
-## Evaluación
+#### Combinaciones:
+Las empanadas pueden combinarse en grupos de dos para crear empanadas con precios promedio. Por ejemplo, una empanada de 12 euros y una de 16 euros pueden combinarse para formar dos empanadas de 14 euros.
 
-### Mínimo
-Para el APTO se deben pasar todos los test excepto los de validaciones de errores en la entrada de datos
+#### Objetivo:
+Pagar el precio **mínimo** al comprar todas las empanadas.
 
-### Extra
-Pasar los test de validación de errores en la entrada de datos (Throws error)
+### :pencil2: Análisis de los posibles casos.
 
-### Ejemplo de ejecución de algunos test
+En papel, comencé a analizar los casos y combinaciones posibles para intentar encontrar patrones que me ayuden a resolver el problema: sabía cómo era la forma de combinar para los casos particulares pero no lograba poder llegar a una generalización, es decir, una solución que me valga para todos los casos.
 
-```bash
-✓ main.test.js (7)
-   ✓ Function fn - Input Parameter Test Cases (7)
-     ✓ Case: fn(1, 1, 1) - Expected Result: 14
-     ✓ Case: fn(3, 3, 0) - Expected Result: 26
-     ✓ Case: fn(2, 0, 1) - Expected Result: 14
-     ✓ Case: fn(9, 10, 11) - Expected Result: 142
-     ✓ Throw error on negative input value: fn(-1, 3, 1)
-     ✓ Throws error when the total sum of inputs (2+2+1) is not a multiple of 3: fn(2, 2, 1)
-     ✓ Throws error when the total sum of inputs (15+15+20) is not less than 40: fn(15, 15, 20)
-```
+Llegué a las siguientes conclusiones:
 
- 
+* Separarlo por casos, como hice al principio (que todas las empanadas sean de un solo precio, que sean de dos precios o que sean de tres precios diferentes), no era el camino.
+* Siempre debía combinar todas las empanadas posibles, siendo la mejor combinación las de mayor precio con las de menor precio.
+* Debía agrupar las empanadas de a 3 y descubrir cuál era la de mayor precio (para pagar esa) y si existían otras de ese valor, incluirlas en el mismo grupo para evitar pagarlas.
+
+
+
+
+
+
+
+
+
